@@ -1,0 +1,53 @@
+.logo {
+  color: #484848;
+  font-family: Volkhov;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 52px */
+  text-decoration: none;
+}
+
+.header {
+  width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 77px;
+}
+
+.element {
+  color: #484848;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.shoppingCard {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: #000000;
+  border-radius: 10px;
+  box-shadow: none;
+  cursor: pointer;
+}
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.menuList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 20px;
+}

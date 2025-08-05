@@ -1,0 +1,108 @@
+.promoSideBarLeft {
+  width: 392px;
+  height: 756px;
+  border-radius: 10px;
+  background: #e0e0e0;
+}
+
+.screen {
+  margin-top: 96px;
+  display: flex;
+  gap: 35px;
+}
+
+.promoSideBarLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.headerBlockCenter {
+  width: 426px;
+  height: 150px;
+  border-radius: 10px;
+  background: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  overflow: hidden;
+}
+
+.headerBlockCenterImg {
+  width: 399px;
+  height: 145px;
+  flex-shrink: 0;
+}
+.ultimate {
+  color: #484848;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 91px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 91px */
+  letter-spacing: -3.64px;
+  margin: 0;
+}
+
+.sale {
+  text-align: center;
+  font-family: Poppins;
+  font-size: 187px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -10.285px;
+  color: transparent; /* ← убирает заливку */
+  line-height: 100%; /* 91px */
+  margin-top: 0;
+  margin-bottom: 0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #484848;
+}
+
+.newCollection {
+  color: #484848;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 100%; /* 91px */
+  margin: 0;
+}
+
+.promoSideBarCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 756px;
+}
+
+.headerBlockCenterImg {
+  width: 426px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.centerBlockCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.promoSideBarRight {
+  width: 392px;
+  height: 756px;
+  border-radius: 10px;
+  background: #e0e0e0;
+}
+.promoSideBarRight {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}

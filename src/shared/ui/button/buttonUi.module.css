@@ -1,0 +1,16 @@
+.baseButton {
+  width: 207px;
+  height: 56px;
+  border-radius: 10px;
+  background: #000;
+  box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.15);
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 100%; /* 16px */
+  border: 0px;
+  cursor: pointer;
+}
