@@ -1,6 +1,7 @@
 .promoSideBarLeft {
-  width: 392px;
-  height: 756px;
+  max-width: 392px;
+  width: 100%;
+  max-height: 756px;
   border-radius: 10px;
   background: #e0e0e0;
 }
@@ -9,16 +10,19 @@
   margin-top: 96px;
   display: flex;
   gap: 35px;
+  width: 100%;
+  max-width: 1280px;
 }
 
 .promoSideBarLeft {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  flex: 1;
 }
 
 .headerBlockCenter {
-  width: 426px;
+  max-width: 426px;
   height: 150px;
   border-radius: 10px;
   background: #e0e0e0;
@@ -29,9 +33,9 @@
 }
 
 .headerBlockCenterImg {
-  width: 399px;
-  height: 145px;
-  flex-shrink: 0;
+  max-width: 399px;
+  width: 100%;
+  height: auto;
 }
 .ultimate {
   color: #484848;
@@ -79,12 +83,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 756px;
-}
-
-.headerBlockCenterImg {
-  width: 426px;
-  height: 150px;
-  flex-shrink: 0;
+  flex: 1;
 }
 
 .centerBlockCenter {
@@ -96,7 +95,8 @@
 }
 
 .promoSideBarRight {
-  width: 392px;
+  max-width: 392px;
+  width: 100%;
   height: 756px;
   border-radius: 10px;
   background: #e0e0e0;
@@ -105,4 +105,27 @@
   display: flex;
   align-items: end;
   justify-content: center;
+  flex: 1;
+}
+
+@media (max-width: 1156px) {
+  .promoSideBarLeft {
+    display: none;
+  }
+
+  .promoSideBarRight {
+    display: none;
+  }
+
+  .promoSideBarCenter {
+    align-items: center;
+  }
+
+  .ultimate {
+    font-size: 72px;
+  }
+
+  .sale {
+    font-size: 120px;
+  }
 }

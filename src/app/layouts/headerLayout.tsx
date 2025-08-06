@@ -4,7 +4,7 @@ export const HeaderLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      {children}
     </>
   );
 };

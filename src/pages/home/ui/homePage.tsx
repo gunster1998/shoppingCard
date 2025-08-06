@@ -1,11 +1,7 @@
 import * as React from "react";
 import { PromoSaleBlock } from "@features/index";
-import style from "./homePage.module.css";
+// import style from "./homePage.module.css";
 
 export const HomePage: React.FC = () => {
-  return (
-    <div className={style.global}>
-      <PromoSaleBlock></PromoSaleBlock>
-    </div>
-  );
+  return <PromoSaleBlock></PromoSaleBlock>;
 };
