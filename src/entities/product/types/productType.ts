@@ -11,6 +11,7 @@ export interface Card {
   category: string;
   image: string;
   rating: Raiting;
+  quantity: number;
 }
 
 export interface Products {

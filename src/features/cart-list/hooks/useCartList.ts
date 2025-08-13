@@ -1,10 +1,14 @@
 import { useCartContext } from "@entities/index";
+import { QuantityOperator } from "@shared/index";
 
 export const useCartList = () => {
   const { cartState, setCartState } = useCartContext();
 
-  const updateCountProduct = (id: string, operator: "+" | "-") => {
-    if (operator === "+") {
+  const updateCountProduct = (
+    id: string,
+    operator: QuantityOperator.Increase | QuantityOperator.Decrease
+  ) => {
+    if (operator === QuantityOperator.Increase) {
       setCartState((prev) => {
         return {
           purchase: [
@@ -17,7 +21,7 @@ export const useCartList = () => {
         };
       });
     }
-    if (operator === "-") {
+    if (operator === QuantityOperator.Decrease) {
       setCartState((prev) => {
         return {
           purchase: prev.purchase
@@ -45,13 +49,10 @@ export const useCartList = () => {
     });
   };
 
-  const total = () => {
-    const summa = cartState.purchase.reduce(
-      (accum, item) => accum + item.price * item.quantity * 83,
-      0
-    );
-    return summa;
-  };
+  const total = cartState.purchase.reduce(
+    (accum, item) => accum + item.price * item.quantity * 83,
+    0
+  );
 
   return { updateCountProduct, deleteProduct, total };
 };

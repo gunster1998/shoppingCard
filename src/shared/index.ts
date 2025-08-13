@@ -1,5 +1,7 @@
 export { ButtonUi } from "./ui/button/buttonUi";
 
-export { QuantityInput } from "./ui/spinner/spinnerNumber";
+export { Spinner } from "./ui/spinner/spinner";
 
-export { SpinnerCart } from "./ui/spinner-cart/spinnerCart";
+export { Card } from "./ui/card/card";
+
+export { QuantityOperator } from "./constants/cart";

@@ -1,12 +1,28 @@
-export const fetchProducts = async () => {
-  try {
-    const resoponse = await fetch(`https://fakestoreapi.com/products`);
+import { Raiting } from "@entities/product/types/productType";
 
-    if (!resoponse.ok) {
-      throw new Error(`Ошибка при загрузки продуктов: ${resoponse.status}`);
+type ApiProductType = {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  category: string;
+  image: string;
+  rating: Raiting;
+};
+
+export const fetchProducts = async (url: string) => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Ошибка при загрузки продуктов: ${response.status}`);
     }
 
-    const data = await resoponse.json();
+    let data = await response.json();
+
+    data = data.map((prev: ApiProductType) => {
+      return { ...prev, quantity: 1 };
+    });
 
     return [...data];
   } catch (error) {

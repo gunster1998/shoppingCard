@@ -2,7 +2,7 @@ import style from "./buttonUi.module.css";
 
 interface propsButton extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "delete" | "default";
+  variant?: "delete" | "baseButton" | "addToCart";
   type?: "button" | "submit" | "reset";
 }
 

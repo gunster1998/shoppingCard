@@ -1,23 +1,34 @@
-import { useProductContext } from "@entities/product/service/useProductContext";
-import { useState } from "react";
-import { fetchProducts } from "../api/fetchProducts";
+import { useProductContext } from "@entities/index";
 
-export const useCards = () => {
-  const { productState, setProductState } = useProductContext();
+export const useCartList = () => {
+  const { setProductState } = useProductContext();
 
-  const [isLoading, setIsLoading] = useState<null | boolean>(false);
-
-  const initCards = async () => {
-    setIsLoading(true);
-    const products = await fetchProducts();
-
-    setIsLoading(false);
-    setProductState({ cards: [...products] });
+  const updateCountProduct = (id: string, operator: "+" | "-") => {
+    if (operator === "+") {
+      setProductState((prev) => {
+        return {
+          cards: [
+            ...prev.cards.map((product) => {
+              return product.id === id
+                ? { ...product, quantity: product.quantity + 1 }
+                : product;
+            }),
+          ],
+        };
+      });
+    }
+    if (operator === "-") {
+      setProductState((prev) => {
+        return {
+          cards: prev.cards.map((product) => {
+            return product.id === id && product.quantity > 1
+              ? { ...product, quantity: product.quantity - 1 }
+              : product;
+          }),
+        };
+      });
+    }
   };
 
-  return {
-    initCards,
-    isLoading,
-    productState,
-  };
+  return { updateCountProduct };
 };

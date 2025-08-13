@@ -15,3 +15,7 @@ export { CartContext } from "./cart/service/cartContext";
 export { useCartContext } from "./cart/service/useCartContext";
 
 export type { Purchase } from "./cart/type/cartType";
+
+export { useCart } from "./cart/hooks/useCart";
+
+export { useProductContext } from "./product/service/useProductContext";

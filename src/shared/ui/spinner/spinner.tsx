@@ -1,27 +1,25 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import type { Cart } from "@entities/cart/type/cartType";
-interface propsSpin {
+import { QuantityOperator } from "@shared/index";
+interface PropsSpin {
   id: string;
-  cartState: Cart;
-  updateCountProduct: (id: string, operator: "+" | "-") => void;
+  quantity: number;
+  onChange: (
+    id: string,
+    operator: QuantityOperator.Increase | QuantityOperator.Decrease
+  ) => void;
 }
 
-export const SpinnerCart: React.FC<propsSpin> = ({
-  id,
-  cartState,
-  updateCountProduct,
-}) => {
+export const Spinner: React.FC<PropsSpin> = ({ id, quantity, onChange }) => {
   const handleDecrease = () => {
-    updateCountProduct(id, "-");
+    onChange(id, QuantityOperator.Decrease);
   };
 
   const handleIncrease = () => {
-    updateCountProduct(id, "+");
+    onChange(id, QuantityOperator.Increase);
   };
 
-  const quantity = cartState.purchase.find((item) => item.id === id)?.quantity;
   return (
     <Box>
       <Typography variant="subtitle1"></Typography>
@@ -30,11 +28,11 @@ export const SpinnerCart: React.FC<propsSpin> = ({
         alignItems="center"
         border="1px solid #e0e0e0"
         borderRadius="6px"
-        max-width="130px"
+        maxWidth="130px"
+        height="42px"
         width="100%"
         justifyContent="space-between"
         px={1}
-        mt={1}
       >
         <IconButton size="small" onClick={handleDecrease}>
           <RemoveIcon fontSize="small" />

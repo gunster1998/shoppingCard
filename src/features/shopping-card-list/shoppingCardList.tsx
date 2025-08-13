@@ -1,18 +1,17 @@
 import style from "./shoppingCardList.module.css";
-import { ShoppingCard } from "@features/index";
-import { useCards } from "./hooks/useCards";
-import { useEffect } from "react";
+import { useFetch } from "./hooks/useFetch";
+import { Card } from "@shared/index";
+import { useCart } from "@entities/index";
+import { useCartList } from "./hooks/useCards";
 
 export const ShoppingCardList: React.FC = () => {
-  const { initCards, isLoading, productState } = useCards();
+  const { addToCart } = useCart();
+  const { updateCountProduct } = useCartList();
+  const { isLoading, productState } = useFetch();
 
-  useEffect(() => {
-    initCards();
-  }, []);
-  console.log(productState);
   const cards = productState.cards.map((card) => {
     return (
-      <ShoppingCard
+      <Card
         key={card.id}
         id={card.id}
         title={card.title}
@@ -21,12 +20,15 @@ export const ShoppingCardList: React.FC = () => {
         category={card.category}
         image={card.image}
         rating={card.rating}
-      ></ShoppingCard>
+        quantity={card.quantity}
+        onButtonClick={addToCart}
+        onCount={updateCountProduct}
+      />
     );
   });
   if (isLoading)
     return (
-      <>
+      <div className={style.wrap}>
         <svg
           className="spinner"
           width="65px"
@@ -37,14 +39,14 @@ export const ShoppingCardList: React.FC = () => {
           <circle
             className={style.path}
             fill="none"
-            stroke-width="6"
-            stroke-linecap="round"
+            strokeWidth="6"
+            strokeLinecap="round"
             cx="33"
             cy="33"
             r="30"
           ></circle>
         </svg>
-      </>
+      </div>
     );
   return (
     <>
