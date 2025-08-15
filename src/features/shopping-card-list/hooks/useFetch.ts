@@ -1,8 +1,6 @@
 import { useProductContext } from "@entities/product/service/useProductContext";
 import { useState, useEffect } from "react";
-import { fetchProducts } from "../api/fetchProducts";
-
-const URL = "https://fakestoreapi.com/products";
+import { ProductsApi } from "@entities/index";
 
 export const useFetch = () => {
   const [isLoading, setIsLoading] = useState<null | boolean>(false);
@@ -14,7 +12,7 @@ export const useFetch = () => {
       try {
         setIsLoading(true);
         setError(false);
-        const cards = await fetchProducts(URL);
+        const cards = await ProductsApi.getProducts();
         setProductState({ cards: [...cards] });
         setIsLoading(false);
       } catch (error) {

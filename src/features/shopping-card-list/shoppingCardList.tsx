@@ -1,13 +1,13 @@
 import style from "./shoppingCardList.module.css";
-import { useFetch } from "./hooks/useFetch";
 import { Card } from "@shared/index";
 import { useCart } from "@entities/index";
 import { useCartList } from "./hooks/useCards";
+import { useProductQuery } from "@entities/index";
 
 export const ShoppingCardList: React.FC = () => {
   const { addToCart } = useCart();
   const { updateCountProduct } = useCartList();
-  const { isLoading, productState } = useFetch();
+  const { productState, isSuccess, isError, isPending } = useProductQuery();
 
   const cards = productState.cards.map((card) => {
     return (
@@ -26,7 +26,7 @@ export const ShoppingCardList: React.FC = () => {
       />
     );
   });
-  if (isLoading)
+  if (isPending)
     return (
       <div className={style.wrap}>
         <svg

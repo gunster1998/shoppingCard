@@ -2,8 +2,7 @@ export interface Raiting {
   rate: number;
   count: number;
 }
-
-export interface Card {
+export interface CardApi {
   id: string;
   title: string;
   description: string;
@@ -11,6 +10,9 @@ export interface Card {
   category: string;
   image: string;
   rating: Raiting;
+}
+
+export interface Card extends CardApi {
   quantity: number;
 }
 

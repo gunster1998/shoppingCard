@@ -19,3 +19,9 @@ export type { Purchase } from "./cart/type/cartType";
 export { useCart } from "./cart/hooks/useCart";
 
 export { useProductContext } from "./product/service/useProductContext";
+
+export { ProductsApi } from "./product/api/productsApi";
+
+export { useProductQuery } from "./product/model/useProductsQuery";
+
+export type { CardApi } from "./product/types/productType";

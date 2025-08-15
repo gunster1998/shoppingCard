@@ -4,7 +4,7 @@ export const CartPage: React.FC = () => {
   return (
     <>
       <>
-        <CartList></CartList>
+        <CartList />
       </>
     </>
   );
