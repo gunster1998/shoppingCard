@@ -1,10 +1,14 @@
 import { useProductContext } from "@entities/index";
+import { QuantityOperator } from "@shared/index";
 
-export const useCartList = () => {
+export const useCardList = () => {
   const { setProductState } = useProductContext();
 
-  const updateCountProduct = (id: string, operator: "+" | "-") => {
-    if (operator === "+") {
+  const updateCountProduct = (
+    id: string,
+    operator: QuantityOperator.Increase | QuantityOperator.Decrease
+  ) => {
+    if (operator === QuantityOperator.Increase) {
       setProductState((prev) => {
         return {
           cards: [
@@ -17,7 +21,8 @@ export const useCartList = () => {
         };
       });
     }
-    if (operator === "-") {
+
+    if (operator === QuantityOperator.Decrease) {
       setProductState((prev) => {
         return {
           cards: prev.cards.map((product) => {

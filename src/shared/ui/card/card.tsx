@@ -1,7 +1,7 @@
 import style from "./card.module.css";
 import Rating from "@mui/material/Rating";
 import type { Purchase } from "@entities/index";
-import { ButtonUi, Spinner } from "@shared/index";
+import { ButtonUi, Spinner, QuantityOperator } from "@shared/index";
 import type { Raiting } from "@entities/product/types/productType";
 
 type cardProps = {
@@ -14,7 +14,11 @@ type cardProps = {
   rating: Raiting;
   quantity: number;
   onButtonClick: ({ id, title, price, image, quantity }: Purchase) => void;
-  onCount: (id: string, operator: "+" | "-") => void;
+  onCount: (
+    id: string,
+    operator: QuantityOperator.Increase | QuantityOperator.Decrease
+  ) => void;
+  isInCart: boolean;
 };
 
 export const Card: React.FC<cardProps> = ({
@@ -27,6 +31,7 @@ export const Card: React.FC<cardProps> = ({
   quantity,
   onButtonClick,
   onCount,
+  isInCart,
 }) => {
   return (
     <>
@@ -45,20 +50,23 @@ export const Card: React.FC<cardProps> = ({
           </div>
           <div className={style.countAdd}>
             <Spinner id={id} quantity={quantity} onChange={onCount}></Spinner>
-            <ButtonUi
-              variant="addToCart"
-              onClick={() =>
-                onButtonClick({
-                  id,
-                  title,
-                  price: parseInt(price),
-                  image,
-                  quantity,
-                })
-              }
-            >
-              Добавить
-            </ButtonUi>
+            {!isInCart && (
+              <ButtonUi
+                variant="addToCart"
+                style={{ margin: "0 0 0 40px" }}
+                onClick={() =>
+                  onButtonClick({
+                    id,
+                    title,
+                    price: parseInt(price),
+                    image,
+                    quantity,
+                  })
+                }
+              >
+                Добавить
+              </ButtonUi>
+            )}
           </div>
         </div>
       </div>

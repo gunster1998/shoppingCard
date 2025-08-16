@@ -21,18 +21,15 @@ export const Spinner: React.FC<PropsSpin> = ({ id, quantity, onChange }) => {
   };
 
   return (
-    <Box>
-      <Typography variant="subtitle1"></Typography>
+    <>
       <Box
         display="flex"
         alignItems="center"
         border="1px solid #e0e0e0"
         borderRadius="6px"
-        maxWidth="130px"
         height="42px"
         width="100%"
         justifyContent="space-between"
-        px={1}
       >
         <IconButton size="small" onClick={handleDecrease}>
           <RemoveIcon fontSize="small" />
@@ -42,6 +39,6 @@ export const Spinner: React.FC<PropsSpin> = ({ id, quantity, onChange }) => {
           <AddIcon fontSize="small" />
         </IconButton>
       </Box>
-    </Box>
+    </>
   );
 };

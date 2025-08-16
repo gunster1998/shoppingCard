@@ -1,6 +1,7 @@
 import { useCartContext } from "@entities/index";
 import { Cart, Purchase } from "@entities/index";
 import { toast } from "sonner";
+import { QuantityOperator } from "@shared/index";
 
 export const useCart = () => {
   const { cartState, setCartState } = useCartContext();
@@ -38,6 +39,66 @@ export const useCart = () => {
       },
     });
   };
+  const isInCart = (id: string): boolean => {
+    return cartState.purchase.some((product) => id === product.id);
+  };
 
-  return { addToCart };
+  const updateCountCart = (
+    id: string,
+    operator: QuantityOperator.Increase | QuantityOperator.Decrease
+  ) => {
+    if (operator === QuantityOperator.Increase) {
+      setCartState((prev) => {
+        return {
+          purchase: [
+            ...prev.purchase.map((product) => {
+              return product.id === id
+                ? { ...product, quantity: product.quantity + 1 }
+                : product;
+            }),
+          ],
+        };
+      });
+    }
+    if (operator === QuantityOperator.Decrease) {
+      setCartState((prev) => {
+        return {
+          purchase: prev.purchase
+            .map((product) => {
+              return product.id === id
+                ? { ...product, quantity: product.quantity - 1 }
+                : product;
+            })
+            .filter((productNull) => {
+              return productNull.quantity > 0;
+            }),
+        };
+      });
+    }
+  };
+  const deleteProduct = (id: string) => {
+    setCartState((prev) => {
+      return {
+        purchase: [
+          ...prev.purchase.filter((item) => {
+            return item.id !== id;
+          }),
+        ],
+      };
+    });
+  };
+
+  const total = cartState.purchase.reduce(
+    (accum, item) => accum + item.price * item.quantity * 83,
+    0
+  );
+
+  return {
+    addToCart,
+    isInCart,
+    updateCountCart,
+    deleteProduct,
+    total,
+    cartState,
+  };
 };
