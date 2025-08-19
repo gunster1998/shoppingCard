@@ -9,3 +9,5 @@ export { QuantityOperator } from "./constants/cart";
 export { api } from "./api/axiosInstance";
 
 export { KEYS } from "./config/query-keys";
+
+export { CardSkeleton } from "./skeletons/card-skeleton/cardSkeleton";

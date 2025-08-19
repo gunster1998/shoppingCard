@@ -1,5 +1,5 @@
 import style from "./shoppingCardList.module.css";
-import { Card } from "@shared/index";
+import { Card, CardSkeleton } from "@shared/index";
 import { useCart } from "@entities/index";
 import { useCardList } from "./hooks/useCardList";
 import { useProductQuery } from "@entities/index";
@@ -37,24 +37,10 @@ export const ShoppingCardList: React.FC = () => {
 
   if (isPending)
     return (
-      <div className={style.wrap}>
-        <svg
-          className="spinner"
-          width="65px"
-          height="65px"
-          viewBox="0 0 66 66"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle
-            className={style.path}
-            fill="none"
-            strokeWidth="6"
-            strokeLinecap="round"
-            cx="33"
-            cy="33"
-            r="30"
-          ></circle>
-        </svg>
+      <div className={style.cardList}>
+        {Array.from({ length: 8 }).map((_, i) => (
+          <CardSkeleton key={i} />
+        ))}
       </div>
     );
 
