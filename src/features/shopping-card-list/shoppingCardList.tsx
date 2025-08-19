@@ -5,11 +5,11 @@ import { useCardList } from "./hooks/useCardList";
 import { useProductQuery } from "@entities/index";
 
 export const ShoppingCardList: React.FC = () => {
-  const { addToCart, isInCart, updateCountCart, cartState } = useCart();
+  const { addToCart, isInCart, updateCountCart, purchase } = useCart();
   const { updateCountProduct } = useCardList();
-  const { productState, isPending } = useProductQuery();
+  const { cards, isPending } = useProductQuery();
 
-  const cards = productState.cards.map((card) => {
+  const cardsElement = cards.map((card) => {
     const isCart = isInCart(card.id);
 
     return (
@@ -24,8 +24,8 @@ export const ShoppingCardList: React.FC = () => {
         rating={card.rating}
         quantity={
           isCart
-            ? cartState.purchase.find((item) => item.id === card.id)
-                ?.quantity ?? card.quantity
+            ? purchase.find((item) => item.id === card.id)?.quantity ??
+              card.quantity
             : card.quantity
         }
         onButtonClick={addToCart}
@@ -58,5 +58,5 @@ export const ShoppingCardList: React.FC = () => {
       </div>
     );
 
-  return <div className={style.cardList}>{cards}</div>;
+  return <div className={style.cardList}>{cardsElement}</div>;
 };

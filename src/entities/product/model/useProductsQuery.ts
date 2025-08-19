@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { ProductsApi } from "../api/productsApi";
-import { useProductContext } from "@entities/product/service/useProductContext";
 import type { Card } from "@entities/index";
 import { useEffect } from "react";
-
+import { useProductStore } from "@entities/index";
+import { KEYS } from "@shared/index";
 export const useProductQuery = () => {
-  const { productState, setProductState } = useProductContext();
+  const { cards, setProducts } = useProductStore();
 
   const { data, isSuccess, isError, isPending } = useQuery<Card[]>({
-    queryKey: ["products"],
+    queryKey: [KEYS.product],
     queryFn: ProductsApi.getProducts,
     staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
     if (isSuccess && data) {
-      setProductState({ cards: data });
+      setProducts(data);
     }
-  }, [isSuccess, data, setProductState]);
+  }, [isSuccess, data, setProducts]);
 
-  return { productState, isSuccess, isError, isPending };
+  return { cards, isSuccess, isError, isPending };
 };

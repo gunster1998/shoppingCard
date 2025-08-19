@@ -7,3 +7,5 @@ export { Card } from "./ui/card/card";
 export { QuantityOperator } from "./constants/cart";
 
 export { api } from "./api/axiosInstance";
+
+export { KEYS } from "./config/query-keys";

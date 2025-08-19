@@ -1,35 +1,25 @@
-import { useCartContext } from "@entities/index";
-import { Cart, Purchase } from "@entities/index";
+import { useCartStore } from "@entities/index";
+import { Purchase } from "@entities/index";
 import { toast } from "sonner";
 import { QuantityOperator } from "@shared/index";
 
 export const useCart = () => {
-  const { cartState, setCartState } = useCartContext();
+  const { purchase, setPurchase } = useCartStore();
 
-  const addToCart = ({ id, title, price, image, quantity }: Purchase) => {
-    const existing = cartState.purchase.find(
-      (item: Purchase) => item.id === id
-    );
+  const addToCart = ({ id, title, price, image, quantity = 1 }: Purchase) => {
+    const existing = purchase.find((item: Purchase) => item.id === id);
 
     const totalToCart = existing ? existing.quantity + quantity : quantity;
 
-    setCartState((prev: Cart) => {
-      if (existing) {
-        return {
-          purchase: prev.purchase.map((item: Purchase) => {
-            if (item.id === id) {
-              return { ...item, quantity: item.quantity + quantity };
-            } else {
-              return item;
-            }
-          }),
-        };
-      }
+    const addData = existing
+      ? purchase.map((item: Purchase) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        )
+      : [...purchase, { id, title, price, image, quantity }];
 
-      return {
-        purchase: [...prev.purchase, { id, title, price, image, quantity }],
-      };
-    });
+    setPurchase(addData);
 
     toast(`Товар ${title} добавлен в корзину`, {
       description: `Количество ${totalToCart}`,
@@ -40,7 +30,7 @@ export const useCart = () => {
     });
   };
   const isInCart = (id: string): boolean => {
-    return cartState.purchase.some((product) => id === product.id);
+    return purchase.some((product) => id === product.id);
   };
 
   const updateCountCart = (
@@ -48,47 +38,38 @@ export const useCart = () => {
     operator: QuantityOperator.Increase | QuantityOperator.Decrease
   ) => {
     if (operator === QuantityOperator.Increase) {
-      setCartState((prev) => {
-        return {
-          purchase: [
-            ...prev.purchase.map((product) => {
-              return product.id === id
-                ? { ...product, quantity: product.quantity + 1 }
-                : product;
-            }),
-          ],
-        };
-      });
+      setPurchase([
+        ...purchase.map((product) => {
+          return product.id === id
+            ? { ...product, quantity: product.quantity + 1 }
+            : product;
+        }),
+      ]);
     }
     if (operator === QuantityOperator.Decrease) {
-      setCartState((prev) => {
-        return {
-          purchase: prev.purchase
-            .map((product) => {
-              return product.id === id
-                ? { ...product, quantity: product.quantity - 1 }
-                : product;
-            })
-            .filter((productNull) => {
-              return productNull.quantity > 0;
-            }),
-        };
-      });
+      setPurchase([
+        ...purchase
+          .map((product) => {
+            return product.id === id
+              ? { ...product, quantity: product.quantity - 1 }
+              : product;
+          })
+          .filter((productNull) => {
+            return productNull.quantity > 0;
+          }),
+      ]);
     }
   };
+
   const deleteProduct = (id: string) => {
-    setCartState((prev) => {
-      return {
-        purchase: [
-          ...prev.purchase.filter((item) => {
-            return item.id !== id;
-          }),
-        ],
-      };
-    });
+    setPurchase([
+      ...purchase.filter((item) => {
+        return item.id !== id;
+      }),
+    ]);
   };
 
-  const total = cartState.purchase.reduce(
+  const total = purchase.reduce(
     (accum, item) => accum + item.price * item.quantity * 83,
     0
   );
@@ -99,6 +80,6 @@ export const useCart = () => {
     updateCountCart,
     deleteProduct,
     total,
-    cartState,
+    purchase,
   };
 };

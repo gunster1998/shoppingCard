@@ -1,15 +1,15 @@
 import style from "./list.module.css";
 import { useCartList } from "../hooks/useCartList";
 import { Spinner } from "@shared/index";
-import { useCartContext } from "@entities/index";
+import { useCartStore } from "@entities/index";
 
-export const List: React.FC = () => {
-  const { cartState } = useCartContext();
+export const List = () => {
+  const { purchase } = useCartStore();
   const { updateCountProduct, deleteProduct } = useCartList();
 
-  const productsList = cartState.purchase.map((product) => {
-    const price = product.price * 84;
-    const totalPrice = product.price * 84 * product.quantity;
+  const productsList = purchase.map((product) => {
+    const price = Math.round(product.price * 84);
+    const totalPrice = Math.round(product.price * 84 * product.quantity);
 
     return (
       <div key={product.id} className={style.card}>
@@ -37,7 +37,7 @@ export const List: React.FC = () => {
           />
         </div>
 
-        <div className={style.totalPrice}>{totalPrice}</div>
+        <div className={style.totalPrice}>{totalPrice} ₽</div>
       </div>
     );
   });

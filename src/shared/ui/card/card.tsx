@@ -8,7 +8,7 @@ type cardProps = {
   id: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   category: string;
   image: string;
   rating: Raiting;
@@ -58,7 +58,7 @@ export const Card: React.FC<cardProps> = ({
                   onButtonClick({
                     id,
                     title,
-                    price: parseInt(price),
+                    price: price,
                     image,
                     quantity,
                   })

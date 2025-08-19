@@ -1,5 +1,6 @@
 export interface Cart {
   purchase: Purchase[];
+  setPurchase: (purchase: Purchase[]) => void;
 }
 
 export interface Purchase {
