@@ -8,7 +8,7 @@ export const useProductQuery = () => {
   const { cards, setProducts } = useProductStore();
 
   const { data, isSuccess, isError, isPending } = useQuery<Card[]>({
-    queryKey: [KEYS.product],
+    queryKey: KEYS.product,
     queryFn: ProductsApi.getProducts,
     staleTime: 1000 * 60 * 5,
   });
