@@ -7,4 +7,8 @@ export const ProductsApi = {
 
     return data.map((item) => ({ ...item, quantity: 1 }));
   },
+  getById: async (id: string): Promise<CardApi> => {
+    const { data } = await api.get<CardApi>(`products/${id}`);
+    return data;
+  },
 };

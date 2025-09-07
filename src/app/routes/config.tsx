@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { HomePage, ShopPage, CartPage } from "@pages/index";
+import { HomePage, ShopPage, CartPage, ProductCardPage } from "@pages/index";
 import { HeaderLayout } from "@app/index";
 import { Toaster } from "sonner";
 
@@ -26,6 +26,14 @@ export const routes: RouteObject[] = [
     element: (
       <HeaderLayout>
         <CartPage />
+      </HeaderLayout>
+    ),
+  },
+  {
+    path: "/products/:id",
+    element: (
+      <HeaderLayout>
+        <ProductCardPage></ProductCardPage>
       </HeaderLayout>
     ),
   },
